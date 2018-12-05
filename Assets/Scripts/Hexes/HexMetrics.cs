@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< HEAD
 public static class HexDimensions 
 {
 	public static readonly float Size = 20f;
