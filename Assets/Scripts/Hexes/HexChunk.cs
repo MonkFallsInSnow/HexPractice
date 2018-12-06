@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class HexMap
+public class HexChunk
 {
 	public Data MapData { get; private set; }
 
 	public struct Data
 	{
-		public Dictionary<Vector3, HexCell> Cells { get; private set; }
+		//public Dictionary<Vector3, HexCell> Cells { get; private set; }
+		public Dictionary<HexCoords, HexCell> Cells { get; private set; }
 		public int Columns { get; private set; }
 		public int Rows { get; private set; }
 		public Vector3 Origin { get; private set; }
 
 		public Data(int rows, int columns, Vector3 origin)
 		{
-			this.Cells = new Dictionary<Vector3, HexCell>(new Vector3CoordComparer());
+			//this.Cells = new Dictionary<Vector3, HexCell>(new Vector3CoordComparer());
+			this.Cells = new Dictionary<HexCoords, HexCell>();
 			this.Rows = rows;
 			this.Columns = columns;
 
@@ -24,25 +26,25 @@ public class HexMap
 		}
 	}
 
-	public HexMap(int rows, int columns, Vector3 origin)
+	public HexChunk(int rows, int columns, Vector3 origin)
 	{
 		this.MapData = new Data(rows, columns, origin);
-
 		this.GenerateMap(this.MapData);
 	}
 
-	private void GenerateMap(HexMap.Data data)
+	private void GenerateMap(HexChunk.Data data)
 	{
-		Vector3 coords = data.Origin;
-		float rowOffset = HexDimensions.InnerRadius + HexDimensions.BridgeWidth;
+		//Vector3 coords = data.Origin;
+		//float rowOffset = HexDimensions.InnerRadius + HexDimensions.BridgeWidth;
 		
 		for(int row = 0; row < data.Rows; row++)
 		{
 			for(int col = 0; col < data.Columns; col++)
 			{
-				//AxialCoords hexCoords = new AxialCoords(col-row/2, row);
-				AxialCoords hexCoords = AxialCoords.ConvertToAxialCoords(row, col);
-				HexCell cell = new HexCell(hexCoords, this.GetElevation(coords));
+				HexCoords hexCoords = new HexCoords(row, col);
+				HexCell cell = new HexCell(hexCoords, this.GetElevation(hexCoords));
+				this.MapData.Cells.Add(hexCoords, cell);
+				/*
 				this.MapData.Cells.Add(coords, cell);
 
 				coords = new Vector3(
@@ -50,8 +52,10 @@ public class HexMap
 					coords.y,
 					coords.z
 				);
+				*/
 			}
 
+			/*
 			coords = new Vector3(
 				//(row + 1) * rowOffset,
 				(row + 1) % 2 == 0 ? data.Origin.x : rowOffset + data.Origin.x,
@@ -59,13 +63,14 @@ public class HexMap
 				coords.z + HexDimensions.VerticalSpacing + HexDimensions.BridgeWidth
 
 			);
+			*/
 		}
 	}
 
-	public int GetElevation(Vector3 hexCoords)
+	private int GetElevation(HexCoords hexCoords)
 	{
 		//elevation test
-		return (int)(Mathf.PerlinNoise(hexCoords.x / 10, hexCoords.z / 30) * 10);
+		return (int)(Mathf.PerlinNoise(hexCoords.X / HexDimensions.OuterRadius, hexCoords.Z / HexDimensions.OuterRadius) * 10);
 	}
 
 

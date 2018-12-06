@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TestWorld : MonoBehaviour {
 	public int rows;
 	public int columns;
-
 
 	void Start () {
 		CreateHexMap();
@@ -23,8 +23,8 @@ public class TestWorld : MonoBehaviour {
 		mr.material = new Material(Shader.Find("Standard"));
 		mr.material.color = new Color32(19, 114, 43, 255);
 
-		HexMap hexMap = new HexMap(rows, columns, Vector3.zero);
-		Mesh mesh = HexMesh.CreateHexMap(hexMap.MapData);
+		HexChunk hexMap = new HexChunk(rows, columns, Vector3.zero);
+		Mesh mesh = HexMeshGenerator.CreateHexMap(hexMap.MapData);
 		mesh.name = "Hex Grid";
 		mf.mesh = mesh;
 		mc.sharedMesh = mesh;

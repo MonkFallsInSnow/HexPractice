@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class HexCell 
 {
-	public AxialCoords Coords { get; private set; }
+	public HexCoords Coords { get; private set; }
+	public Vector3 Origin { get; private set; } //init by converting hexcoords
 	public byte Type { get; private set; }
 	public int Elevation { get; private set; }
 
-
-	public HexCell(AxialCoords coords, int elevation)
+	public HexCell(HexCoords coords, int elevation)
 	{
 		this.Coords = coords;
 		this.Elevation = elevation;
 	}
 
+	/*
 	public Vector3 GetNeighborWorldPosition(Vector3 neighborCoords)
 	{
 		AxialCoords localPosition = this.Coords + AxialCoords.ConvertToAxialCoords(neighborCoords);
@@ -25,5 +26,5 @@ public class HexCell
 	{
 		return this.Coords + AxialCoords.ConvertToAxialCoords(neighborCoords);
 	}
-
+	*/
 }

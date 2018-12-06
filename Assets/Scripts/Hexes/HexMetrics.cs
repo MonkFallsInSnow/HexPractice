@@ -4,9 +4,9 @@ using UnityEngine;
 
 public static class HexDimensions 
 {
-	public static readonly float Size = 20f;
-	public static readonly float OuterRadius = Size * 0.5f;
-	public static readonly float InnerRadius = (Mathf.Sqrt(3) * OuterRadius) * 0.5f;
+	public static readonly float EdgeLength = 20f;
+	public static readonly float OuterRadius = EdgeLength;
+	public static readonly float InnerRadius = EdgeLength * (Mathf.Sqrt(3) * 0.5f);
 	public static readonly float BridgeWidth = 1.25f;
 	public static readonly float HorizontalSpacing = (InnerRadius * 2f) + BridgeWidth;
 	public static readonly float VerticalSpacing = (OuterRadius * 1.5f) + BridgeWidth;
@@ -36,7 +36,7 @@ public static class HexNeighbors
 	public static readonly Vector3 SW = new Vector3(-HexDimensions.InnerRadius, 0f, -HexDimensions.VerticalSpacing) + new Vector3(-HexDimensions.BridgeWidth, 0f, -HexDimensions.BridgeWidth);
 	public static readonly Vector3 W = new Vector3(-HexDimensions.InnerRadius, 0f, 0f) + new Vector3(-HexDimensions.BridgeWidth, 0f, 0f);
 
-	public static readonly Vector3[] Neighbors = { NE, E, SE, SW, W };
+	//public static readonly Vector3[] Neighbors = { NE, E, SE, SW, W };
 }
 
 
