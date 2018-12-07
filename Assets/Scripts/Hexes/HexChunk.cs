@@ -41,7 +41,7 @@ public class HexChunk
 		{
 			for(int col = 0; col < data.Columns; col++)
 			{
-				HexCoords hexCoords = new HexCoords(row, col);
+				HexCoords hexCoords = new HexCoords(col, row);
 				HexCell cell = new HexCell(hexCoords, this.GetElevation(hexCoords));
 				this.MapData.Cells.Add(hexCoords, cell);
 				/*

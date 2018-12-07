@@ -28,6 +28,7 @@ public static class HexCorners
 	//public static readonly Vector3[] Corners = { N, NE, SE, S, SW, NW };
 }
 
+/*
 public static class HexNeighbors
 {
 	public static readonly Vector3 NE = new Vector3(HexDimensions.InnerRadius, 0f, HexDimensions.VerticalSpacing) + new Vector3(HexDimensions.BridgeWidth, 0f, HexDimensions.BridgeWidth);
@@ -38,6 +39,16 @@ public static class HexNeighbors
 
 	//public static readonly Vector3[] Neighbors = { NE, E, SE, SW, W };
 }
+*/
 
+public static class HexNeighbors
+{
+	public static readonly HexCoords NE = new HexCoords(0, 1);
+	public static readonly HexCoords E = new HexCoords(1, 0);
+	public static readonly HexCoords SE = new HexCoords(1, -1);
+	public static readonly HexCoords SW = new HexCoords(0, -1);
+	public static readonly HexCoords W = new HexCoords(-1, 0);
 
+	//public static readonly Vector3[] Neighbors = { NE, E, SE, SW, W };
+}
 

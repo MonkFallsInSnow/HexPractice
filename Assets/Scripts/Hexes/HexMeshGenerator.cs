@@ -63,10 +63,11 @@ public static class HexMeshGenerator
 
 		Mesh mesh = new Mesh();
 
-		foreach(var cell in mapData.Cells)
+		foreach(KeyValuePair<HexCoords, HexCell> cell in mapData.Cells)
 		{
 			Vector3 cellWorldCoords = CoordManager.GetWorldCoordinates(cell.Value);
-			Debug.Log(cell.Key.ToString() + " -> " + cellWorldCoords.ToString());
+			//Debug.Log(cell.Key.ToString() + " -> " + cellWorldCoords.ToString());
+			Debug.Log(cell.Key.ToString() + " NE-> " + HexNeighbors.NE.ToString() + " WNE-> " + CoordManager.GetWorldCoordinates(HexNeighbors.NE));
 			//
 			Vector3 currentCellElevation = Vector3.zero;
 			Vector3 northEastElevation = Vector3.zero;
@@ -82,6 +83,13 @@ public static class HexMeshGenerator
 				cellWorldCoords + HexCorners.NW + currentCellElevation
 			);
 
+			Quad northEastBridge = new Quad (
+				cellWorldCoords + HexCorners.N,
+				CoordManager.GetWorldCoordinates(HexNeighbors.NE) + HexCorners.SW,
+				CoordManager.GetWorldCoordinates(HexNeighbors.NE) + HexCorners.S,
+				cellWorldCoords + HexCorners.NE
+			);
+/*
 			Quad northEastBridge = new Quad (
 				cellWorldCoords + HexCorners.N  + currentCellElevation,
 				cellWorldCoords + HexNeighbors.NE + HexCorners.SW + currentCellElevation + northEastElevation,
@@ -114,11 +122,11 @@ public static class HexMeshGenerator
 				cellWorldCoords + HexNeighbors.E + HexCorners.SW + currentCellElevation + eastElevation,
 				cellWorldCoords + HexNeighbors.SE + HexCorners.N + currentCellElevation + southEastElevation
 			);
-
+*/
 			BuildHex(hex);
 			
-			//BuildQuad(northEastBridge);
-				BuildQuad(eastBridge);
+			BuildQuad(northEastBridge);
+				//BuildQuad(eastBridge);
 				//BuildQuad(southEastBridge);
 				//BuildTriangle(triangleUp);
 				//BuildTriangle(triangleDown);
