@@ -81,7 +81,7 @@ public static class HexMeshGenerator
 				cellWorldCoords + HexCorners.SW + currentCellElevation,
 				cellWorldCoords + HexCorners.NW + currentCellElevation
 			);
-/* 
+
 			Quad northEastBridge = new Quad (
 				cellWorldCoords + HexCorners.N  + currentCellElevation,
 				cellWorldCoords + HexNeighbors.NE + HexCorners.SW + currentCellElevation + northEastElevation,
@@ -114,15 +114,15 @@ public static class HexMeshGenerator
 				cellWorldCoords + HexNeighbors.E + HexCorners.SW + currentCellElevation + eastElevation,
 				cellWorldCoords + HexNeighbors.SE + HexCorners.N + currentCellElevation + southEastElevation
 			);
-*/
+
 			BuildHex(hex);
-			/*
-			BuildQuad(northEastBridge);
+			
+			//BuildQuad(northEastBridge);
 				BuildQuad(eastBridge);
-				BuildQuad(southEastBridge);
-				BuildTriangle(triangleUp);
-				BuildTriangle(triangleDown);
-				*/
+				//BuildQuad(southEastBridge);
+				//BuildTriangle(triangleUp);
+				//BuildTriangle(triangleDown);
+				
 		}
 
 		mesh.vertices = vertices.ToArray();
