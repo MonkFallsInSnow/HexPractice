@@ -66,8 +66,7 @@ public static class HexMeshGenerator
 		foreach(KeyValuePair<HexCoords, HexCell> cell in mapData.Cells)
 		{
 			Vector3 cellWorldCoords = CoordManager.GetWorldCoordinates(cell.Value);
-			//Debug.Log(cell.Key.ToString() + " -> " + cellWorldCoords.ToString());
-			Debug.Log(cell.Key.ToString() + " NE-> " + HexNeighbors.NE.ToString() + " WNE-> " + CoordManager.GetWorldCoordinates(HexNeighbors.NE));
+			//Debug.Log(cell.Key.ToString() + " NE-> " + HexNeighbors.NE.ToString() + " WNE-> " + CoordManager.GetWorldCoordinates(HexNeighbors.NE));
 			//
 			Vector3 currentCellElevation = Vector3.zero;
 			Vector3 northEastElevation = Vector3.zero;
@@ -85,51 +84,44 @@ public static class HexMeshGenerator
 
 			Quad northEastBridge = new Quad (
 				cellWorldCoords + HexCorners.N,
-				CoordManager.GetWorldCoordinates(HexNeighbors.NE) + HexCorners.SW,
-				CoordManager.GetWorldCoordinates(HexNeighbors.NE) + HexCorners.S,
+				cellWorldCoords + CoordManager.GetWorldCoordinates(HexNeighbors.NE) + HexCorners.SW,
+				cellWorldCoords + CoordManager.GetWorldCoordinates(HexNeighbors.NE) + HexCorners.S,
 				cellWorldCoords + HexCorners.NE
-			);
-/*
-			Quad northEastBridge = new Quad (
-				cellWorldCoords + HexCorners.N  + currentCellElevation,
-				cellWorldCoords + HexNeighbors.NE + HexCorners.SW + currentCellElevation + northEastElevation,
-				cellWorldCoords + HexNeighbors.NE + HexCorners.S + currentCellElevation + northEastElevation,
-				cellWorldCoords + HexCorners.NE  + currentCellElevation
 			);
 
 			Quad southEastBridge = new Quad (
 				cellWorldCoords + HexCorners.SE  + currentCellElevation,
-				cellWorldCoords + HexNeighbors.SE + HexCorners.N + currentCellElevation + southEastElevation,
-				cellWorldCoords + HexNeighbors.SE + HexCorners.NW + currentCellElevation + southEastElevation,
+				cellWorldCoords + CoordManager.GetWorldCoordinates(HexNeighbors.SE) + HexCorners.N + currentCellElevation + southEastElevation,
+				cellWorldCoords + CoordManager.GetWorldCoordinates(HexNeighbors.SE) + HexCorners.NW + currentCellElevation + southEastElevation,
 				cellWorldCoords + HexCorners.S  + currentCellElevation
 			);
 
 			Quad eastBridge = new Quad (
 				cellWorldCoords + HexCorners.NE  + currentCellElevation,
-				cellWorldCoords + HexNeighbors.E + HexCorners.NW + currentCellElevation + eastElevation,
-				cellWorldCoords + HexNeighbors.E + HexCorners.SW + currentCellElevation + eastElevation,
+				cellWorldCoords + CoordManager.GetWorldCoordinates(HexNeighbors.E) + HexCorners.NW + currentCellElevation + eastElevation,
+				cellWorldCoords + CoordManager.GetWorldCoordinates(HexNeighbors.E) + HexCorners.SW + currentCellElevation + eastElevation,
 				cellWorldCoords + HexCorners.SE  + currentCellElevation
 			);
 
 			Triangle triangleUp = new Triangle (
 				cellWorldCoords + HexCorners.NE  + currentCellElevation,
-				cellWorldCoords + HexNeighbors.NE + HexCorners.S + currentCellElevation + northEastElevation,
-				cellWorldCoords + HexNeighbors.E + HexCorners.NW + currentCellElevation + eastElevation
+				cellWorldCoords + CoordManager.GetWorldCoordinates(HexNeighbors.NE) + HexCorners.S + currentCellElevation + northEastElevation,
+				cellWorldCoords + CoordManager.GetWorldCoordinates(HexNeighbors.E) + HexCorners.NW + currentCellElevation + eastElevation
 			);
 
 			Triangle triangleDown = new Triangle (
 				cellWorldCoords + HexCorners.SE  + currentCellElevation,
-				cellWorldCoords + HexNeighbors.E + HexCorners.SW + currentCellElevation + eastElevation,
-				cellWorldCoords + HexNeighbors.SE + HexCorners.N + currentCellElevation + southEastElevation
+				cellWorldCoords + CoordManager.GetWorldCoordinates(HexNeighbors.E) + HexCorners.SW + currentCellElevation + eastElevation,
+				cellWorldCoords + CoordManager.GetWorldCoordinates(HexNeighbors.SE) + HexCorners.N + currentCellElevation + southEastElevation
 			);
-*/
+
 			BuildHex(hex);
 			
 			BuildQuad(northEastBridge);
-				//BuildQuad(eastBridge);
-				//BuildQuad(southEastBridge);
-				//BuildTriangle(triangleUp);
-				//BuildTriangle(triangleDown);
+			BuildQuad(eastBridge);
+			BuildQuad(southEastBridge);
+			BuildTriangle(triangleUp);
+			BuildTriangle(triangleDown);
 				
 		}
 
