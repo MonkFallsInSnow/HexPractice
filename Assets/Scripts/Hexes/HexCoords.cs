@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //may want to change file name back to axialcoords and just make this a static class, since all it really does is convert coordinates to and from axial coords
-public class HexCoords
+public class HexCoords : IComparer
 {
-	private readonly System.Guid id;
+	public readonly System.Guid Id;
 	public readonly int X;	
 	public readonly int Z;
 	public readonly int Y;
 
 	public HexCoords(int x, int z)
 	{
-		this.id = System.Guid.NewGuid();
+		this.Id = System.Guid.NewGuid();
 		this.X = x - z / 2;
 		//this.X = x;
 		this.Y = -x - z;
@@ -45,7 +45,7 @@ public class HexCoords
 
 	public override int GetHashCode()
 	{
-		return System.Convert.ToString(this.id).GetHashCode();
+		return System.Convert.ToString(this.Id).GetHashCode();
 	}
 
 	public static bool operator!=(HexCoords a, HexCoords b)
@@ -56,6 +56,29 @@ public class HexCoords
 	public override string ToString()
 	{
 		return string.Format("({0}, {1})", this.X, this.Z);
+	}
+
+	public int Compare(object obj1, object obj2)
+	{
+		HexCoords a = (HexCoords)obj1;
+		HexCoords b = (HexCoords)obj2;
+
+		if (a.X.CompareTo(b.X) != 0)
+		{
+			return a.X.CompareTo(b.X);
+		}
+		else if (a.Y.CompareTo(b.Y) != 0)
+		{
+			return a.Y.CompareTo(b.Y);
+		}
+		else if (a.Z.CompareTo(b.Z) != 0)
+		{
+			return a.Z.CompareTo(b.Z);
+		}
+		else
+		{
+			return 0;
+		}
 	}
 }
 

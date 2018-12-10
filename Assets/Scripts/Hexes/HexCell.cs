@@ -12,7 +12,7 @@ public class HexCell
 	public HexCell(HexCoords coords, int elevation)
 	{
 		this.Coords = coords;
-		this.Elevation = elevation;
+		this.Elevation = (int)(elevation * HexDimensions.ElevationStep);
 	}
 
 	/*

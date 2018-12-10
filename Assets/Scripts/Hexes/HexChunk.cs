@@ -15,10 +15,12 @@ public class HexChunk
 		public int Rows { get; private set; }
 		public Vector3 Origin { get; private set; }
 
+		private static CoordManager.CoordComparer comparer = new CoordManager.CoordComparer();
+
 		public Data(int rows, int columns, Vector3 origin)
 		{
 			//this.Cells = new Dictionary<Vector3, HexCell>(new Vector3CoordComparer());
-			this.Cells = new Dictionary<HexCoords, HexCell>();
+			this.Cells = new Dictionary<HexCoords, HexCell>(comparer);
 			this.Rows = rows;
 			this.Columns = columns;
 

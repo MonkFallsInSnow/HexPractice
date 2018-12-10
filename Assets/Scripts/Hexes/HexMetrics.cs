@@ -10,7 +10,7 @@ public static class HexDimensions
 	public static readonly float BridgeWidth = EdgeLength / 5f;
 	public static readonly float HorizontalSpacing = (InnerRadius * 2f) + BridgeWidth;
 	public static readonly float VerticalSpacing = (OuterRadius * 1.5f) + BridgeWidth;
-	public static readonly float ElevationStep = 1f;
+	public static readonly float ElevationStep = 5f;
 }
 
 public static class HexCorners
